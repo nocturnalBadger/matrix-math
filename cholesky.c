@@ -12,9 +12,13 @@
 
 Matrix *choleskyDecomp(Matrix const *s)
 {
-    Matrix *r = subMat(1, s->rows, 1, s->columns, s);
-    Matrix *v = subMat(1, r->rows, 0, 0, s);
-    Matrix *s_prime = subtract(r, multiply(v, transpose(v)));
+    // Form a column of L based on valued from the first column of S
+
+    // The bottom part of that L is used with the remaining corner of S to form new S
+
+    // Apply recursively on the now smaller S.
+    // New L's are padded with 0's to maintain NxN size
+
 }
 
 bool verify(Matrix *s, Matrix *l)
