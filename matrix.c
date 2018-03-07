@@ -9,6 +9,8 @@
 #include "matrix.h"
 
 #include<stdlib.h>
+#include <math.h>
+
 
 Matrix *newMatrix(int rows, int columns)
 {
@@ -34,7 +36,7 @@ Matrix *fromArray(int rows, int columns, double inputData[rows][columns])
 }
 
 
-void printMatrix(Matrix *m)
+void printMatrix(Matrix const *m)
 {
     for (int i = 0; i < m->rows; ++i) {
         for (int j = 0; j < m->columns; ++j) {
@@ -44,7 +46,7 @@ void printMatrix(Matrix *m)
     }
 }
 
-Matrix *transpose(Matrix *m)
+Matrix *transpose(Matrix const *m)
 {
     Matrix *t = newMatrix(m->columns, m->rows);
 
@@ -56,7 +58,22 @@ Matrix *transpose(Matrix *m)
     return t;
 }
 
-Matrix *multiply(Matrix *a, Matrix *b)
+double determinant(Matrix const *m)
+{
+    int n = m->rows; // Must be square
+    if (n == 1) {
+        return m->data[0][0];
+    }
+    double det = 0;
+    int i = 0; // Some row of the matrix. Just use the first.
+    for (int j = 0; j < n; ++j) {
+        double cofactor = pow(-1, i + j) * determinant(minor(i, j, m));
+        det += m->data[i][j] * cofactor;
+    }
+    return det;
+}
+
+Matrix *multiply(Matrix const *a, Matrix const *b)
 {
     Matrix *result = newMatrix(a->rows, b->columns);
     // Iterate over each spot where we will place a result
@@ -68,6 +85,45 @@ Matrix *multiply(Matrix *a, Matrix *b)
                 cell += a->data[i][p] * b->data[p][j];
             }
             result->data[i][j] = cell;
+        }
+    }
+    return result;
+}
+
+Matrix *subtract(Matrix const *a, Matrix const *b)
+{
+    Matrix *result = newMatrix(a->rows, a->columns);
+    for (int i = 0; i < a->rows; ++i) {
+        for (int j = 0; j < a->columns; ++j) {
+            result->data[i][j] = a->data[i][j] - b->data[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix *subMat(int rowStart, int rowEnd, int colStart, int colEnd, Matrix const *m)
+{
+    Matrix *result = newMatrix(rowEnd - rowStart + 1, colEnd - colStart + 1);
+    for (int i = rowStart; i <= rowEnd; ++i) {
+        for (int j = colStart; j <= colEnd; ++j) {
+            result->data[i - rowStart][j - colStart] = m->data[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix *minor(int x, int y, Matrix const *m)
+{
+    Matrix *result = newMatrix(m->rows - 1, m->columns - 1);
+    for (int i = 0; i < m->rows; ++i) {
+        if (i == x) {
+            continue;
+        }
+        for (int j = 0; j < m->columns; ++j) {
+            if (j == y) {
+                continue;
+            }
+            result->data[i > x ? i - 1 : i][j > y ? j - 1 : j] = m->data[i][j];
         }
     }
     return result;

@@ -33,14 +33,21 @@ Matrix *fromArray(int rows, int columns, double inputData[rows][columns]);
  * Print out the contents of a matrix to stdout
  * @param m matrix to print
  */
-void printMatrix(Matrix *m);
+void printMatrix(Matrix const *m);
 
 /**
  * Return a new matrix which is the transposition of the original
  * @param m input matrix
  * @return m.T
  */
-Matrix *transpose(Matrix *m);
+Matrix *transpose(Matrix const *m);
+
+/**
+  * Get the determinant of a square matrix using the LePlace expansion
+  * @param m a square matrix
+  * @return determinant of the matrix
+  */
+double determinant(Matrix const *m);
 
 /**
  * Multiply two matrices together
@@ -48,4 +55,33 @@ Matrix *transpose(Matrix *m);
  * @param b second matrix [PxQ]
  * @return matrices multiplied together [NxQ]
  */
-Matrix *multiply(Matrix *a, Matrix *b);
+Matrix *multiply(Matrix const *a, Matrix const *b);
+
+/**
+  * Subtract one matrix from another
+  * @param a first matrix
+  * @param b second matrix
+  * A and B must have the same dimmensions
+  * @return new matrix which is the result of the operation A - B
+  */
+Matrix *subtract(Matrix const *a, Matrix const *b);
+
+/**
+  * Copy a portion of a matrix to a new matrix
+  * @param rowStart row index to begin copying
+  * @param rowEnd row index to stop copying
+  * @param colStart column index to begin copying
+  * @param colEnd column index to stop copying
+  * Indices are zero-indexed and inclusive
+  * @return copy of the given portion of the matrix
+  */
+Matrix *subMat(int rowStart, int rowEnd, int colStart, int colEnd, Matrix const *m);
+
+
+/**
+  * Get the sub-matrix which excludes the given row and column indices
+  * @param x row index to exclude
+  * @param y column index to exclude
+  * @return an (n-1)x(n-1) matrix excluding the given row and column
+  */
+Matrix *minor(int x, int y, Matrix const *m);

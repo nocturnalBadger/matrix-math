@@ -21,4 +21,4 @@ Matrix *choleskyDecomp(*Matrix s);
  * @param matrix l
  * @return true if the conditions are met
  */
-bool verify(Matrix *s, Matrix *l)
+bool verify(Matrix *s, Matrix *l);

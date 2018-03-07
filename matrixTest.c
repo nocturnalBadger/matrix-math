@@ -49,6 +49,24 @@ int main()
     double in3[3][3] = {{4, 5, 6},
                         {6, 5, 4},
                         {4, 6, 5}};
+    double in4[1][1] = {{5}};
+    double in5[2][2] = {{2, 4},
+                        {1, 6}};
+
     printf("\n");
     printMatrix(multiply(fromArray(3, 3, in2), fromArray(3, 3, in3)));
+
+    printf("\n");
+    printMatrix(subMat(1, 2, 1, 2, fromArray(3, 3, in2)));
+
+    printf("\n");
+    printMatrix(minor(1, 1, fromArray(3, 3, in2)));
+
+    printf("\n%lf\n", determinant(fromArray(1, 1, in4)));
+
+    printf("\n%lf\n", determinant(fromArray(2, 2, in5)));
+
+    printf("\n%lf\n", determinant(fromArray(3, 3, in2)));
+
+    printf("\n%lf\n", determinant(fromArray(3, 3, in3)));
 }
