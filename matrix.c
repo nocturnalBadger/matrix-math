@@ -73,6 +73,15 @@ double determinant(Matrix const *m)
     return det;
 }
 
+double mag(Matrix const *m)
+{
+    double a = 0;
+    for (int i = 0; i < m->rows; ++i) {
+        a += pow(m->data[i][0], 2);
+    }
+    return sqrt(a);
+}
+
 Matrix *multiply(Matrix const *a, Matrix const *b)
 {
     Matrix *result = newMatrix(a->rows, b->columns);

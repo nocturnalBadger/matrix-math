@@ -69,4 +69,6 @@ int main()
     printf("\n%lf\n", determinant(fromArray(3, 3, in2)));
 
     printf("\n%lf\n", determinant(fromArray(3, 3, in3)));
+
+    printf("\n%lf\n", mag(fromArray(3, 3, in3)));
 }

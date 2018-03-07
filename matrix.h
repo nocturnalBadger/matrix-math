@@ -50,6 +50,14 @@ Matrix *transpose(Matrix const *m);
 double determinant(Matrix const *m);
 
 /**
+  * Get the magnitude of a single-column matrix (aka a vector)
+  * @param m a column vector
+  *
+  * @return magnitude (length in n-d space) of the vector
+  */
+double mag(Matrix const *m);
+
+/**
  * Multiply two matrices together
  * @param a first matrix (order matters) [NxM]
  * @param b second matrix [PxQ]
