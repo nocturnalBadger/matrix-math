@@ -13,7 +13,7 @@ Matrix *newMatrix(int rows, int columns)
     Matrix *m = malloc(sizeof(Matrix));
     m->rows = rows;
     m->columns = columns;
-    m->data = (double (*)[rows]) malloc(rows * sizeof(double (*)[columns]));
+    m->data = (double **) malloc(rows * sizeof(double (*)[columns]));
     for (int i = 0; i < rows; ++i) {
         m->data[i] = (double *) malloc(columns * sizeof(double));
     }
