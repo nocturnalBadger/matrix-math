@@ -38,9 +38,10 @@ Matrix *fromArray(int rows, int columns, double inputData[rows][columns])
 
 void printMatrix(Matrix const *m)
 {
+    printf("\n");
     for (int i = 0; i < m->rows; ++i) {
         for (int j = 0; j < m->columns; ++j) {
-            printf("%.1lf ", m->data[i][j]);
+            printf("%3.1lf ", m->data[i][j]);
         }
         printf("\n");
     }

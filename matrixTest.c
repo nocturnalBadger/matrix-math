@@ -22,9 +22,7 @@ int main()
     myMatrix->data[2][1] = 8;
     myMatrix->data[2][2] = 9;
     printMatrix(myMatrix);
-    printf("\n");
     printMatrix(transpose(myMatrix));
-    printf("\n");
 
     double in0[3][3] = {{2, 4, 6},
                        {8, 10, 12},
@@ -37,10 +35,8 @@ int main()
     a = fromArray(1, 3, in1);
     Matrix *b = transpose(a);
 
-    printf("\n");
     printMatrix(multiply(a, b));
 
-    printf("\n");
     printMatrix(multiply(b, a));
 
     double in2[3][3] = {{1, 2, 3},
@@ -53,13 +49,10 @@ int main()
     double in5[2][2] = {{2, 4},
                         {1, 6}};
 
-    printf("\n");
     printMatrix(multiply(fromArray(3, 3, in2), fromArray(3, 3, in3)));
 
-    printf("\n");
     printMatrix(subMat(1, 2, 1, 2, fromArray(3, 3, in2)));
 
-    printf("\n");
     printMatrix(minor(1, 1, fromArray(3, 3, in2)));
 
     printf("\n%lf\n", determinant(fromArray(1, 1, in4)));

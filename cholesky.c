@@ -5,10 +5,8 @@
 */
 
 
-#include "matrix.h"
 #include "cholesky.h"
 
-#include <stdbool.h>
 
 Matrix *choleskyDecomp(Matrix const *s)
 {
@@ -19,7 +17,7 @@ Matrix *choleskyDecomp(Matrix const *s)
     l->data[0][0] = rp;
     for (int i = 1; i < n; ++i) {
         // Copy V into lower part of L
-        l->data[i - 1][0] = s[i][0] / rp;
+        l->data[i][0] = s->data[i][0] / rp;
     }
     // Base case
     if (n == 1) {
@@ -31,24 +29,26 @@ Matrix *choleskyDecomp(Matrix const *s)
     for (int i = 1; i < n; ++i) {
         v->data[i - 1][0] = l->data[i][0];
     }
-    Matrix *s_prime = subtract(subMat(1, s->rows, 1, s->columns, s), multiply(v, transpose(v)));
+    // S' = r - v*v.T
+    Matrix *s_prime = subtract(subMat(1, s->rows - 1, 1, s->columns - 1, s), multiply(v, transpose(v)));
 
     // Apply recursively on the now smaller S.
     Matrix *l_prime = choleskyDecomp(s_prime);
     // New L's are padded with 0's to maintain NxN size
-    for (int i = 1; i < n; ++i) {
-        for (int k = 0; k < i; ++k) {
+    for (int j = 1; j < n; ++j) {
+        for (int k = 0; k < j; ++k) {
             // Fill with zeros to make lower triangular
-            l->data[i][k] = 0;
+            l->data[k][j] = 0;
         }
         // Copy from l_prime (result from recursive decomp)
-        for (int j = i; j < n; ++j) {
-            l->data[i][j] = l_prime[i - 1][j];
+        for (int i = j; i < n; ++i) {
+            l->data[i][j] = l_prime->data[i - 1][j - 1];
         }
     }
+    return l;
 }
 
-bool verify(Matrix *s, Matrix *l)
+bool verify(Matrix const *s, Matrix const *l)
 {
-
+    return false;
 }
