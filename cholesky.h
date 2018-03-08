@@ -24,4 +24,4 @@ Matrix *choleskyDecomp(Matrix const *s);
  * @param matrix l
  * @return true if the conditions are met
  */
-bool verify(Matrix const *s, Matrix const *l);
+bool verifyCholesky(Matrix const *s, Matrix const *l);

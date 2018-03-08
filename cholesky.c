@@ -30,7 +30,8 @@ Matrix *choleskyDecomp(Matrix const *s)
         v->data[i - 1][0] = l->data[i][0];
     }
     // S' = r - v*v.T
-    Matrix *s_prime = subtract(subMat(1, s->rows - 1, 1, s->columns - 1, s), multiply(v, transpose(v)));
+    Matrix *r = subMat(1, s->rows - 1, 1, s->columns - 1, s);
+    Matrix *s_prime = subtract(r, multiply(v, transpose(v)));
 
     // Apply recursively on the now smaller S.
     Matrix *l_prime = choleskyDecomp(s_prime);
@@ -48,7 +49,21 @@ Matrix *choleskyDecomp(Matrix const *s)
     return l;
 }
 
-bool verify(Matrix const *s, Matrix const *l)
+bool verifyCholesky(Matrix const *s, Matrix const *l)
 {
-    return false;
+    int n = s->rows;
+    // L is NxN
+    if (l->rows != n || l->columns != n) {
+        return false;
+    }
+    // L is right triangular
+    for (int j = 0; j < n; ++j) {
+        for (int i = 0; i < j; ++i) {
+            if (l->data[i][j] != 0) {
+                return false;
+            }
+        }
+    }
+    // L*L.T = S
+    return equals(multiply(l, transpose(l)), s);
 }

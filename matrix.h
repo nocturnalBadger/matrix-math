@@ -4,6 +4,10 @@
  * @author Jeremy Schmidt
 */
 
+#include<stdio.h>
+#include<stdlib.h>
+#include <stdbool.h>
+#include <math.h>
 
 struct matrixStruct {
     int rows;
@@ -34,6 +38,15 @@ Matrix *fromArray(int rows, int columns, double inputData[rows][columns]);
  * @param m matrix to print
  */
 void printMatrix(Matrix const *m);
+
+/**
+  * Compare two matrices to tell if their data are identical
+  * @param a first matrix to compare
+  * @param b second matrix to compare
+  *
+  * @return true if matrices are equal
+  */
+bool equals(Matrix const *a, Matrix const *b);
 
 /**
  * Return a new matrix which is the transposition of the original

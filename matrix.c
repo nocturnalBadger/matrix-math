@@ -5,11 +5,7 @@
 */
 
 
-#include<stdio.h>
 #include "matrix.h"
-
-#include<stdlib.h>
-#include <math.h>
 
 
 Matrix *newMatrix(int rows, int columns)
@@ -41,10 +37,25 @@ void printMatrix(Matrix const *m)
     printf("\n");
     for (int i = 0; i < m->rows; ++i) {
         for (int j = 0; j < m->columns; ++j) {
-            printf("%3.1lf ", m->data[i][j]);
+            printf("% 3.1lf ", m->data[i][j]);
         }
         printf("\n");
     }
+}
+
+bool equals(Matrix const *a, Matrix const *b)
+{
+    if (a->rows != b->rows || a->columns != b->columns) {
+        return false;
+    }
+    for (int i = 0; i < a->rows; ++i) {
+        for (int j = 0; j < a->columns; ++j) {
+            if (a->data[i][j] != b->data[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 Matrix *transpose(Matrix const *m)

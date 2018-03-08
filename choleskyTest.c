@@ -13,7 +13,10 @@ int main()
                         {-6, 13, -16},
                         {8, -16, 36}};
 
-    printMatrix(choleskyDecomp(fromArray(3, 3, in0)));
+    Matrix *s = fromArray(3, 3, in0);
+    Matrix *l = choleskyDecomp(s);
+    printMatrix(l);
+    printf("\n%d\n", verifyCholesky(s, l));
     return 0;
 }
 
