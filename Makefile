@@ -15,3 +15,4 @@ clean:
 	rm ./*.o
 	rm matrixTest
 	rm choleskyTest
+	rm qrTest

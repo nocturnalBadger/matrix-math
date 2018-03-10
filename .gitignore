@@ -2,3 +2,4 @@
 *.swp
 matrixTest
 choleskyTest
+qrTest

@@ -33,7 +33,9 @@ int main()
     printMatrix(q1);
     printMatrix(r1);
 
-    printf("%d", verifyQR(a1, q1, r1));
+    printf("%d\n", verifyQR(a1, q1, r1));
+    q1->data[0][0] += 1;
+    printf("%d\n", verifyQR(a1, q1, r1));
 
     return 0;
 }
