@@ -88,6 +88,15 @@ Matrix *multiply(Matrix const *a, Matrix const *b);
 Matrix *subtract(Matrix const *a, Matrix const *b);
 
 /**
+  * Multiply a matrix by a constant
+  * @param m input matrix
+  * @param c constant multiple
+  *
+  * @return Result
+  */
+Matrix * scalarProd(Matrix const *m, double c);
+
+/**
   * Copy a portion of a matrix to a new matrix
   * @param rowStart row index to begin copying
   * @param rowEnd row index to stop copying
@@ -97,6 +106,15 @@ Matrix *subtract(Matrix const *a, Matrix const *b);
   * @return copy of the given portion of the matrix
   */
 Matrix *subMat(int rowStart, int rowEnd, int colStart, int colEnd, Matrix const *m);
+
+/**
+  * Get a column vector from a matrix (specific case of subMat)
+  * @param m input matrix
+  * @param col column to get
+  *
+  * @return column matrix
+  */
+Matrix * column(Matrix const *m, int col);
 
 
 /**

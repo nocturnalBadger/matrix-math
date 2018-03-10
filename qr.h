@@ -3,6 +3,7 @@
  * Define methods used for Gram-Schmidt method
  * @author Jeremy Schmidt
 */
+#include "matrix.h"
 
 #include <stdbool.h>
 
@@ -20,7 +21,7 @@
   *   Q.T * Q = I (Q is orthogonal)
   *   R is upper triangular
   */
-void qrDecomp(Matrix const *a, Matrix *q, matrix *r);
+void qrDecomp(Matrix const *a, Matrix *q, Matrix *r);
 
 
 /**

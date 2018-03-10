@@ -111,6 +111,18 @@ Matrix *multiply(Matrix const *a, Matrix const *b)
     return result;
 }
 
+
+Matrix * scalarProd(Matrix const *m, double c)
+{
+    Matrix *result = newMatrix(m->rows, m->columns);
+    for (int i = 0; i < m->rows; ++i) {
+        for (int j = 0; j < m->columns; ++j) {
+            result->data[i][j] = m->data[i][j] * c;
+        }
+    }
+    return result;
+}
+
 Matrix *subtract(Matrix const *a, Matrix const *b)
 {
     Matrix *result = newMatrix(a->rows, a->columns);
@@ -131,6 +143,12 @@ Matrix *subMat(int rowStart, int rowEnd, int colStart, int colEnd, Matrix const 
         }
     }
     return result;
+}
+
+
+Matrix * column(Matrix const *m, int col)
+{
+    return subMat(0, m->rows - 1, col, col, m);
 }
 
 Matrix *minor(int x, int y, Matrix const *m)
