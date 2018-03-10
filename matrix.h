@@ -34,6 +34,14 @@ Matrix *newMatrix(int rows, int columns);
 Matrix *fromArray(int rows, int columns, double inputData[rows][columns]);
 
 /**
+  * Produce an identity matrix of the given size
+  * @param n dimmension for the square matrix
+  *
+  * @return nxn matrix with ones on the diagonal and zeros everywhere else
+  */
+Matrix * identity(int n);
+
+/**
  * Print out the contents of a matrix to stdout
  * @param m matrix to print
  */

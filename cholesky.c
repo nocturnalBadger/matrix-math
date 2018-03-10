@@ -56,7 +56,7 @@ bool verifyCholesky(Matrix const *s, Matrix const *l)
     if (l->rows != n || l->columns != n) {
         return false;
     }
-    // L is right triangular
+    // L is lower triangular
     for (int j = 0; j < n; ++j) {
         for (int i = 0; i < j; ++i) {
             if (l->data[i][j] != 0) {

@@ -26,10 +26,11 @@ void qrDecomp(Matrix const *a, Matrix *q, Matrix *r);
 
 /**
   * Verify that a set of matrices have the properties of QR decomposition (see above)
+  * Does not check dimmensions because the qrDecomp function takes pre-initialized matrices
   * @param a input matrix a
   * @param q Q component of decomposition
   * @param r R component of decomposition
   *
   * @return true if conditions are met and decomposition if valid
   */
-bool verify(Matrix const *a, Matrix const *q, Matrix const *r);
+bool verifyQR(Matrix const *a, Matrix const *q, Matrix const *r);

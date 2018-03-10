@@ -6,6 +6,7 @@
 
 #include "qr.h"
 
+
 void qrDecomp(Matrix const *a, Matrix *q, Matrix *r)
 {
     int m = a->rows;
@@ -35,8 +36,24 @@ void qrDecomp(Matrix const *a, Matrix *q, Matrix *r)
 }
 
 
-bool verify(Matrix const *a, Matrix const *q, Matrix const *r)
+bool verifyQR(Matrix const *a, Matrix const *q, Matrix const *r)
 {
-    return false;
+    int n = a->columns;
+    // R is right triangular
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            if (r->data[i][j] != 0)
+                return false;
+        }
+    }
+    // A = QR
+    if (!equals(a, multiply(q, r))) {
+        return false;
+    }
+    // Q is orthogonal
+    if (!equals(multiply(transpose(q), q), identity(q->columns))) {
+        return false;
+    }
+    return true;
 }
 

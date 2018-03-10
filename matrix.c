@@ -7,6 +7,7 @@
 
 #include "matrix.h"
 
+#define DOUBLE_TOLERENCE 0.0001
 
 Matrix *newMatrix(int rows, int columns)
 {
@@ -31,6 +32,22 @@ Matrix *fromArray(int rows, int columns, double inputData[rows][columns])
     return m;
 }
 
+Matrix * identity(int n)
+{
+    Matrix *result = newMatrix(n, n);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i == j) {
+                result->data[i][j] = 1;
+            }
+            else {
+                result->data[i][j] = 0;
+            }
+        }
+    }
+    return result;
+}
+
 
 void printMatrix(Matrix const *m)
 {
@@ -50,7 +67,7 @@ bool equals(Matrix const *a, Matrix const *b)
     }
     for (int i = 0; i < a->rows; ++i) {
         for (int j = 0; j < a->columns; ++j) {
-            if (a->data[i][j] != b->data[i][j]) {
+            if (abs(a->data[i][j] - b->data[i][j]) > DOUBLE_TOLERENCE) {
                 return false;
             }
         }
