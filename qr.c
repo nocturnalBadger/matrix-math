@@ -32,6 +32,9 @@ void qrDecomp(Matrix const *a, Matrix *q, Matrix *r)
             // Taking the only data field from this mult should be the same as a dotprod
             r->data[j][rj] = multiply(qjt, column(a, rj))->data[0][0];
         }
+        freeMatrix(qjt);
+
+        freeMatrix(w);
     }
 }
 
@@ -47,11 +50,22 @@ bool verifyQR(Matrix const *a, Matrix const *q, Matrix const *r)
         }
     }
     // A = QR
-    if (!equals(a, multiply(q, r))) {
+    Matrix *qr = multiply(q, r);
+    bool aEqualsQR = equals(a, qr);
+    freeMatrix(qr);
+    if (!aEqualsQR) {
         return false;
     }
+
     // Q is orthogonal
-    if (!equals(multiply(transpose(q), q), identity(q->columns))) {
+    Matrix *qt = transpose(q);
+    Matrix *qTq = multiply(qt, q);
+    Matrix *i = identity(q->columns);
+    bool qIsOrthogonal = equals(qTq, i);
+    freeMatrix(qt);
+    freeMatrix(qTq);
+    freeMatrix(i);
+    if (!qIsOrthogonal) {
         return false;
     }
     return true;

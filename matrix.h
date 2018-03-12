@@ -26,6 +26,12 @@ typedef struct matrixStruct Matrix;
 Matrix *newMatrix(int rows, int columns);
 
 /**
+  * Deallocate a matrix object from heap memory
+  * @param matrix to deallocate
+  */
+void freeMatrix(Matrix *m);
+
+/**
  * Create a matrix from a simple array of values
  * @param rows number of rows
  * @param columns number of columns

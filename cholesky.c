@@ -46,6 +46,12 @@ Matrix *choleskyDecomp(Matrix const *s)
             l->data[i][j] = l_prime->data[i - 1][j - 1];
         }
     }
+
+    freeMatrix(v);
+    freeMatrix(r);
+    freeMatrix(s_prime);
+    freeMatrix(l_prime);
+
     return l;
 }
 

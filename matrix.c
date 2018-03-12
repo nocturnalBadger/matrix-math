@@ -21,6 +21,14 @@ Matrix *newMatrix(int rows, int columns)
     return m;
 }
 
+void freeMatrix(Matrix *m)
+{
+    for (int i = 0; i < m->rows; ++i) {
+        free(m->data[i]);
+    }
+    free(m);
+}
+
 Matrix *fromArray(int rows, int columns, double inputData[rows][columns])
 {
     Matrix *m = newMatrix(rows, columns);
