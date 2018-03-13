@@ -31,7 +31,11 @@ Matrix *choleskyDecomp(Matrix const *s)
     }
     // S' = r - v*v.T
     Matrix *r = subMat(1, s->rows - 1, 1, s->columns - 1, s);
-    Matrix *s_prime = subtract(r, multiply(v, transpose(v)));
+    Matrix *vt = transpose(v);
+    Matrix *vvt = multiply(v, vt);
+    Matrix *s_prime = subtract(r, vvt);
+    freeMatrix(vt);
+    freeMatrix(vvt);
 
     // Apply recursively on the now smaller S.
     Matrix *l_prime = choleskyDecomp(s_prime);
@@ -71,5 +75,10 @@ bool verifyCholesky(Matrix const *s, Matrix const *l)
         }
     }
     // L*L.T = S
-    return equals(multiply(l, transpose(l)), s);
+    Matrix *lt = transpose(l);
+    Matrix *llt = multiply(l, lt);
+    bool lltEqualsS = equals(llt, s);
+    freeMatrix(lt);
+    freeMatrix(llt);
+    return lltEqualsS;
 }

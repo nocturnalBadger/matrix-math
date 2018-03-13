@@ -17,6 +17,8 @@ int main()
     Matrix *l = choleskyDecomp(s);
     printMatrix(l);
     printf("\n%d\n", verifyCholesky(s, l));
+    freeMatrix(s);
+    freeMatrix(l);
     return 0;
 }
 
